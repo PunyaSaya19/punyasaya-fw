@@ -61,8 +61,9 @@ function isLogOut($url = "/main/index.php")
   }
 }
 
-function logout()
+function logout($redirect = '/login.php')
 {
   unset($_SESSION['login']);
   session_destroy();
+  return redirect($redirect);
 }
