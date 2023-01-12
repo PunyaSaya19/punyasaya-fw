@@ -12,9 +12,9 @@ function assets($url)
 
 function url($url, $data = null)
 {
-  if($data != null) {
+  if ($data != null) {
     $url = $url . "?";
-    foreach($data as $k => $v) {
+    foreach ($data as $k => $v) {
       $url .= "$k=$v&";
     }
     $url = substr($url, 0, -1);
