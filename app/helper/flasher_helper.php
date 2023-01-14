@@ -6,23 +6,35 @@ function showFlasher()
   if (isset($_SESSION["CRUD"])) {
     $data = $_SESSION["CRUD"];
     unset($_SESSION["CRUD"]);
-    return "
-    <div id='flash-crud' data-flashType='" . FLASH_TYPE . "' data-title='" . $data['title'] . "' data-text='" . $data['text'] . "' data-icon='" . $data['icon'] . "' data-flash=true>
-    </div>
-    ";
+    if ($data['type'] == 1 || $data['type'] == 2) {
+      return "
+        <div id='flash-crud' data-flashType='" . $data['type'] . "' data-title='" . $data['title'] . "' data-text='" . $data['text'] . "' data-icon='" . $data['icon'] . "' data-flash=true>
+        </div>
+      ";
+    } else {
+      $alertType = ($data['icon'] == 'success') ? 'success' : 'danger';
+      return "
+        <div class='alert alert-$alertType'>
+            <strong>
+              " . $data['text'] . "
+            </strong>
+        </div>
+      ";
+    }
   }
 }
 
-function setFlasher($title, $icon, $text)
+function setFlasher($title, $icon, $text, $type = FLASH_TYPE)
 {
   $_SESSION["CRUD"] = [
     'title' => $title,
     'icon' => $icon,
-    'text' => $text
+    'text' => $text,
+    'type' => $type,
   ];
 }
 
-function setFlashInsert($is_success = true)
+function setFlashInsert($is_success = true, $type = FLASH_TYPE)
 {
   if ($is_success == true) {
     $title = "SELAMAT";
@@ -33,10 +45,10 @@ function setFlashInsert($is_success = true)
     $icon = "error";
     $text = "Data Gagal DITAMBAHKAN!!";
   }
-  setFlasher($title, $icon, $text);
+  setFlasher($title, $icon, $text, $type);
 }
 
-function setFlashUpdate($is_success = true)
+function setFlashUpdate($is_success = true, $type = FLASH_TYPE)
 {
   if ($is_success == true) {
     $title = "SELAMAT";
@@ -47,10 +59,10 @@ function setFlashUpdate($is_success = true)
     $icon = "error";
     $text = "Data Gagal DIUPDATE!!";
   }
-  setFlasher($title, $icon, $text);
+  setFlasher($title, $icon, $text, $type);
 }
 
-function setFlashDelete($is_success = true)
+function setFlashDelete($is_success = true, $type = FLASH_TYPE)
 {
   if ($is_success == true) {
     $title = "SELAMAT";
@@ -61,5 +73,5 @@ function setFlashDelete($is_success = true)
     $icon = "error";
     $text = "Data Gagal DIHAPUS!!";
   }
-  setFlasher($title, $icon, $text);
+  setFlasher($title, $icon, $text, $type);
 }

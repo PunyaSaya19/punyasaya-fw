@@ -17,13 +17,14 @@ const DB_NAME = "nama_databse";
 BASE_URL isikan dengan url nama folder anda
 Note : Jangan gunakan tanda slash(/) pada akhir
 */
-const BASE_URL = "http://localhost/mini-fw-php";
+const BASE_URL = "http://localhost:8080/punyasaya-fw";
 
 /*
 ----------------------
     FLASH TYPE
 ----------------------
-Note : Gunakan value 1 atau 2 
+Note : Gunakan value 1 , 2  , atau 3
+       Jika mengunakan type 3 maka akan menggunakan alert milik bootstrap
 */
 const FLASH_TYPE = 2;
 
